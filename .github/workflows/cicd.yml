@@ -9,6 +9,20 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v2
 
+      - name: Critical Vulnerability Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          exit-code: 1
+          severity: CRITICAL
+
+      - name: Slack notification with RTCamp
+        uses: rtCamp/action-slack-notify@v2
+        env:
+            SLACK_WEBHOOK: ${{ secrets.PRIVATE_SUBMISSION_URL }}
+            SLACK_MESSAGE: 'test msg'
+
+        # todo: format and add author image
       - name: Slack Notification
         uses: slackapi/slack-github-action@v1.26.0
         with:
