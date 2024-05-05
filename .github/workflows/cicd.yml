@@ -1,36 +1,79 @@
 name: cicd-workflow
 on: 
-    push:
-        
+  push:
+
 jobs:
-    test:
-        runs-on: ubuntu-latest
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
 
-        steps:
-        - name: Checkout source
-          uses: actions/checkout@v2
-
-        - name: Slack notification
-          id: slack
-          uses: slackapi/slack-github-action@v1.26.0
-          with:
-            payload: |
+      - name: Slack Notification
+        uses: slackapi/slack-github-action@v1.26.0
+        with:
+          channel-id: 'C0722G90V8C' # private channel id, to change
+          attachments: |
+            [
               {
-                "text": "${{ github.event.head_commit.url }}",
-                "blocks": [
+                "mrkdwn_in": ["text"],
+                "color": "#36a64f",
+                "author_name": "Kei Yam",
+                "author_icon": "https://placeimg.com/16/16/people",
+                "fields": [
                   {
-                    "type": "section",
-                    "text": {
-                      "type": "mrkdwn",
-                      "text": "test pass"
-                    }
-                  }
+                    "title": "Ref",
+                    "value": "refs/heads/master",
+                    "short": true
+                  },
+                  {
+                    "title": "Event",
+                    "value": "push",
+                    "short": true
+                  },
+                  {
+                    "title": "Actions URL",
+                    "value": "Build and Push LINK here",
+                    "short": true
+                  },
+                  {
+                    "title": "Commit",
+                    "value": "commit LINK here",
+                    "short": true
+                  },
+                  {
+                    "title": "Image build and signed",
+                    "value": "",
+                    "short": false
+                  },
+                  {
+                    "title": "Name:",
+                    "value": "Kei Yam",
+                    "short": false
+                  },
+                  {
+                    "title": "Matriculation:",
+                    "value": "A0291912A",
+                    "short": false
+                  },
+                  {
+                    "title": "Email:",
+                    "value": "keiyamx@gmail.com",
+                    "short": false
+                  },
+                  {
+                    "title": "Git:",
+                    "value": "github repo link here",
+                    "short": false
+                  },
+                  {
+                    "title": "Image:",
+                    "value": "docker image link here",
+                    "short": false
+                  },
                 ]
               }
-          env: 
-            #SLACK_BOT_TOKEN: ${{ secrets.PRIVATE_BOT_TOKEN }}
+            ]
+        env:
             SLACK_WEBHOOK_URL: ${{ secrets.PRIVATE_SUBMISSION_URL }}
             SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-
-
-
