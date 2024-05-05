@@ -17,8 +17,9 @@ jobs:
             channel-id: "C0722G90V8C"
             slack-message: "test pass"
           env: 
-            SLACK_BOT_TOKEN: ${{ secrets.PRIVATE_BOT_TOKEN }}
+            #SLACK_BOT_TOKEN: ${{ secrets.PRIVATE_BOT_TOKEN }}
             SLACK_WEBHOOK_URL: ${{ secrets.PRIVATE_SUBMISSION_URL }}
+            SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
 
 
 
