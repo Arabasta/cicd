@@ -1,0 +1,14 @@
+name: cicd-workflow
+on: 
+    push:
+        
+jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        steps:
+        - name: Checkout source
+          uses: actions/checkout@v2
+
+
+
