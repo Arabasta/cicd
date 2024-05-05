@@ -14,8 +14,19 @@ jobs:
           id: slack
           uses: slackapi/slack-github-action@v1.26.0
           with:
-            channel-id: "C0722G90V8C"
-            slack-message: "test pass"
+            payload: |
+              {
+                "text": "${{ github.event.head_commit.url }}",
+                "blocks": [
+                  {
+                    "type": "section",
+                    "text": {
+                      "type": "mrkdwn",
+                      "text": "test pass"
+                    }
+                  }
+                ]
+              }
           env: 
             #SLACK_BOT_TOKEN: ${{ secrets.PRIVATE_BOT_TOKEN }}
             SLACK_WEBHOOK_URL: ${{ secrets.PRIVATE_SUBMISSION_URL }}
