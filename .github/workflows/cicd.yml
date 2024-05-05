@@ -10,5 +10,15 @@ jobs:
         - name: Checkout source
           uses: actions/checkout@v2
 
+        - name: Slack notification
+          id: slack
+          uses: slackapi/slack-github-action@v1.26.0
+          with:
+            channel-id: "C0722G90V8C"
+            slack-message: "test pass"
+          env:
+            SLACK_BOT_TOKEN: ${{ secrets.PRIVATE_BOT_TOKEN }}
+            SLACK_WEBHOOK_URL: ${{ secrets.PRIVATE_SUBMISSION_URL }}
+
 
 
