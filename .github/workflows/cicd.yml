@@ -14,9 +14,8 @@ jobs:
         with:
           format: 'table'
           scan-type: 'fs'
-          scan-ref: '.'
-          exit-code: 1
-          severity: LOW
+          exit-code: '1'
+          severity: 'LOW,MEDIUM,HIGH,CRITICAL'
           output: 'trivy-report.txt'
 
       - name: Cat trivy
