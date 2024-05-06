@@ -63,7 +63,7 @@ jobs:
         run: cosign sign --key ${{ secrets.COSIGN_PRIVATE_KEY }} keiyam/go-fortune:${{ github.sha }}
         env:
           COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
-          COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+          COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }} 
 
         # Slack
       - name: Slack Notification with RTCamp
