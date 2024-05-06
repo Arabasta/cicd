@@ -28,6 +28,17 @@ jobs:
             file_path: 'trivy-report.txt'
             initial_comment: 'Scan report by Kei Yam'
 
+      - name: Slack Notification with RTCamp
+        if: failure()
+        uses: rtCamp/action-slack-notify@v2
+        env:
+            SLACK_WEBHOOK: ${{ secrets.PRIVATE_SUBMISSION_URL }}
+            SLACKIFY_MARKDOWN: true
+            SLACK_TITLE: >
+                **Scan failed - Kei Yam**
+            SLACK_MESSAGE: >
+                Failed trivy scan, see uploaded report
+
         # Docker
       - name: Set up Docker buildx
         uses: docker/setup-buildx-action@v3
@@ -44,19 +55,18 @@ jobs:
             push: true
             tags: keiyam/go-fortune:${{ github.sha }}
 
+
         # Slack
       - name: Slack Notification with RTCamp
         uses: rtCamp/action-slack-notify@v2
         env:
             SLACK_WEBHOOK: ${{ secrets.PRIVATE_SUBMISSION_URL }}
             SLACKIFY_MARKDOWN: true
-            SLACK_MESSAGE_ON_FAILURE: >
-                **Scan failed - Kei Yam**\n
-                Failed trivy scan, see uploaded report
-            SLACK_MESSAGE_ON_SUCCESS: >
+            SLACK_TITLE: >
                 **Image build and signed**
-                Name: Kei Yam\n
-                Matriculation: A0291912A\n
-                Email: keiyamx@gmail.com\n
-                Git: https://github.com/Arabasta/cicd
-                \nImage: https://hub.docker.com/r/keiyam/go-fortune/
+            SLACK_MESSAGE: >
+                **Name**: Kei Yam\n
+                **Matriculation**: A0291912A\n
+                **Email**: keiyamx@gmail.com\n
+                **Git**: https://github.com/Arabasta/cicd
+                \n**Image**: https://hub.docker.com/r/keiyam/go-fortune/
