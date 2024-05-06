@@ -12,10 +12,14 @@ jobs:
       - name: Trivy Vulnerability Scan
         uses: aquasecurity/trivy-action@master
         with:
+          format: 'table'
           scan-type: 'fs'
           exit-code: 1
           severity: LOW
           output: 'trivy-report.txt'
+
+      - name: Cat trivy
+        run: cat trivy-report.txt
 
       - name: Upload Vuln Scan to Slack
         if: failure()
