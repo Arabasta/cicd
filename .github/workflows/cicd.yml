@@ -1,6 +1,8 @@
 name: cicd-workflow
 on: 
   push:
+    branches:
+        - 'release/v[0-9]+.[0-9]+'
 
 jobs:
   main-job: 
@@ -18,7 +20,7 @@ jobs:
           format: 'table'
           scan-type: 'fs'
           exit-code: '1'
-          severity: 'CRITICAL' # set 'HIGH' to test failure
+          severity: 'CRITICAL'
           output: 'trivy-report.txt'
 
       - name: Upload Vuln Scan to Slack
