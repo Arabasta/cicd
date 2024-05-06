@@ -9,12 +9,12 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v2
 
-      - name: Critical Vulnerability Scan
+      - name: Trivy Vulnerability Scan
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'fs'
           exit-code: 1
-          severity: CRITICAL
+          severity: LOW
           output: 'trivy-report.txt'
 
       - name: Upload Vuln Scan to Slack
