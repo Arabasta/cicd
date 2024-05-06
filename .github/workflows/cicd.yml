@@ -18,7 +18,6 @@ jobs:
           output: 'trivy-report.txt'
 
       - name: Upload Vuln Scan to Slack
-        if: failure()
         uses: MeilCli/slack-upload-file@v4
         with:
             slack_token: ${{ secrets.PRIVATE_BOT_TOKEN }}
