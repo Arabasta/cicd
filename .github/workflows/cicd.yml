@@ -23,15 +23,6 @@ jobs:
           severity: 'HIGH'
           output: 'trivy-report.txt'
 
-      - name: Upload Vuln Scan to Slack
-        if: failure()
-        uses: MeilCli/slack-upload-file@v4
-        with:
-            slack_token: ${{ secrets.PRIVATE_BOT_TOKEN }}
-            channel_id: ${{ secrets.PRIVATE_SLACK_CHANNEL_ID }}
-            file_path: 'trivy-report.txt'
-            initial_comment: 'Scan report by Kei Yam'
-
       - name: Slack Notification with RTCamp
         if: failure()
         uses: rtCamp/action-slack-notify@v2
@@ -42,6 +33,15 @@ jobs:
                 Scan failed - Kei Yam
             SLACK_MESSAGE: >
                 Failed trivy scan, see uploaded report
+
+      - name: Upload Vuln Scan to Slack
+        if: failure()
+        uses: MeilCli/slack-upload-file@v4
+        with:
+            slack_token: ${{ secrets.PRIVATE_BOT_TOKEN }}
+            channel_id: ${{ secrets.PRIVATE_SLACK_CHANNEL_ID }}
+            file_path: 'trivy-report.txt'
+            initial_comment: 'Scan report by Kei Yam'
 
         # Docker
       - name: Set up Docker buildx
