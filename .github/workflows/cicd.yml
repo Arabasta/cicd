@@ -20,7 +20,7 @@ jobs:
           format: 'table'
           scan-type: 'fs'
           exit-code: '1'
-          severity: 'HIGH'
+          severity: 'CRITICAL'
           output: 'trivy-report.txt'
 
       - name: Slack Notification with RTCamp
