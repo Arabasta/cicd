@@ -35,7 +35,7 @@ jobs:
             SLACK_WEBHOOK: ${{ secrets.PRIVATE_SUBMISSION_URL }}
             SLACKIFY_MARKDOWN: true
             SLACK_TITLE: >
-                **Scan failed - Kei Yam**
+                Scan failed - Kei Yam
             SLACK_MESSAGE: >
                 Failed trivy scan, see uploaded report
 
@@ -55,6 +55,15 @@ jobs:
             push: true
             tags: keiyam/go-fortune:${{ github.sha }}
 
+        # Cosign
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@v3.5.0
+
+      - name: Sign image with a key
+        run: cosign sign --key ${{ secrets.COSIGN_PRIVATE_KEY }} keiyam/go-fortune:${{ github.sha }}
+        env:
+          COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+          COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
 
         # Slack
       - name: Slack Notification with RTCamp
@@ -63,7 +72,7 @@ jobs:
             SLACK_WEBHOOK: ${{ secrets.PRIVATE_SUBMISSION_URL }}
             SLACKIFY_MARKDOWN: true
             SLACK_TITLE: >
-                **Image build and signed**
+                Image build and signed
             SLACK_MESSAGE: >
                 **Name**: Kei Yam\n
                 **Matriculation**: A0291912A\n
