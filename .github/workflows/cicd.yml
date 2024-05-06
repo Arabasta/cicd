@@ -50,9 +50,13 @@ jobs:
         env:
             SLACK_WEBHOOK: ${{ secrets.PRIVATE_SUBMISSION_URL }}
             SLACKIFY_MARKDOWN: true
-            SLACK_MESSAGE: >
+            SLACK_MESSAGE_ON_FAILURE: >
+                **Scan failed - Kei Yam**\n
+                Failed trivy scan, see uploaded report
+            SLACK_MESSAGE_ON_SUCCESS: >
+                **Image build and signed**
                 Name: Kei Yam\n
                 Matriculation: A0291912A\n
                 Email: keiyamx@gmail.com\n
                 Git: https://github.com/Arabasta/cicd
-                \nImage: https://hub.docker.com/r/keiyam/go-fortune/'
+                \nImage: https://hub.docker.com/r/keiyam/go-fortune/
