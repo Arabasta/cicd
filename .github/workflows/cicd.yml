@@ -3,7 +3,9 @@ on:
   push:
 
 jobs:
-  test:
+  main-job:
+    if: ${{ !contains(github.event.head_commit.message, '#NORUN') }}
+
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
@@ -61,10 +63,9 @@ jobs:
 
       - name: Sign image with a key
         run: |
-          echo "${{ secrets.COSIGN_PRIVATE_KEY }}" > cosign.key
-          cosign sign --yes --key cosign.key keiyam/go-fortune:${{ github.sha }}
+          cosign sign --yes --key env://COSIGN_PRIVATE_KEY keiyam/go-fortune:${{ github.sha }}
         env:
-       #   COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+          COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
           COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }} 
 
         # Slack
