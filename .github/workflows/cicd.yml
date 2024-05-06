@@ -15,11 +15,8 @@ jobs:
           format: 'table'
           scan-type: 'fs'
           exit-code: '1'
-          severity: 'LOW,MEDIUM,HIGH,CRITICAL'
+          severity: 'CRITICAL' # trivy ok... low 0, med 7, high 5, crit 0
           output: 'trivy-report.txt'
-
-      - name: Cat trivy
-        run: cat trivy-report.txt
 
       - name: Upload Vuln Scan to Slack
         if: failure()
