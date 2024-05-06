@@ -13,17 +13,17 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'fs'
-          exit-code: 1 
+          exit-code: 1
           severity: LOW
           output: 'trivy-report.txt'
 
       - name: Upload Vuln Scan to Slack
+        if: failure()
         uses: MeilCli/slack-upload-file@v4
         with:
             slack_token: ${{ secrets.PRIVATE_BOT_TOKEN }}
             channel_id: ${{ secrets.PRIVATE_SLACK_CHANNEL_ID }}
-            file_type: 'text'
-            file_name: 'trivy-report.txt'
+            file_path: 'trivy-report.txt'
             initial_comment: 'Scan report by Kei Yam'
 
       - name: Slack Notification with RTCamp
