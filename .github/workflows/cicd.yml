@@ -54,5 +54,5 @@ jobs:
                 Name: Kei Yam\n
                 Matriculation: A0291912A\n
                 Email: keiyamx@gmail.com\n
-                Git: https://github.com/Arabasta/cicd\n
-                Image: https://hub.docker.com/r/keiyam/go-fortune/'
+                Git: https://github.com/Arabasta/cicd
+                \nImage: https://hub.docker.com/r/keiyam/go-fortune/'
