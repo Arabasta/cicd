@@ -27,7 +27,7 @@ jobs:
         if: failure()
         uses: rtCamp/action-slack-notify@v2
         env:
-            SLACK_WEBHOOK: ${{ secrets.TEST_SUBMISSION_URL }}
+            SLACK_WEBHOOK: ${{ secrets.SUBMISSION_URL }}
             SLACKIFY_MARKDOWN: true
             SLACK_TITLE: >
                 Scan failed - Kei Yam
@@ -39,7 +39,7 @@ jobs:
         uses: MeilCli/slack-upload-file@v4
         with:
             slack_token: ${{ secrets.SLACK_BOT_TOKEN }}
-            channel_id: ${{ secrets.TEST_SUBMISSION_CHANNEL_ID }}
+            channel_id: ${{ secrets.SUBMISSION_CHANNEL_ID }}
             file_path: 'trivy-report.txt'
             initial_comment: 'Scan report by Kei Yam'
 
@@ -74,7 +74,7 @@ jobs:
       - name: Slack Notification with RTCamp
         uses: rtCamp/action-slack-notify@v2
         env:
-            SLACK_WEBHOOK: ${{ secrets.TEST_SUBMISSION_URL }}
+            SLACK_WEBHOOK: ${{ secrets.SUBMISSION_URL }}
             SLACKIFY_MARKDOWN: true
             SLACK_TITLE: >
                 Image build and signed
