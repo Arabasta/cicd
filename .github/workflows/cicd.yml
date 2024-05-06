@@ -28,6 +28,7 @@ jobs:
         uses: rtCamp/action-slack-notify@v2
         env:
             SLACK_WEBHOOK: ${{ secrets.SUBMISSION_URL }}
+            SLACK_COLOR: failure
             SLACKIFY_MARKDOWN: true
             SLACK_TITLE: >
                 Scan failed - Kei Yam
